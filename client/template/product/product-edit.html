@@ -1,0 +1,65 @@
+<template name="editProduct">
+  {{#ionModal customTemplate=true}}
+      {{#autoForm collection="Restaurant.Collection.Products" doc=product id="productEdit" type="update"}}
+          <div class="bar bar-header bar-stable">
+              <button data-dismiss="modal" type="button" class="button button-clear">បោះបង់</button>
+              <h2 class="title">កែប្រែ ទំនិញ</h2>
+              <button type="submit" class="button button-positive button-clear">កែប្រែ</button>
+          </div>
+          <div class="content has-header overflow-scroll">
+            <div>
+                {{> afQuickField name='name' }}
+                {{> afQuickField name='enName'}}
+                <div class="row">
+                  <div class="col col-25">
+                    {{> afQuickField name='unitId'}}
+                  </div>
+                  <div class="col col-25">
+                    {{> afQuickField name='price'}}
+                  </div>
+                  <div class="col col-25">
+                    {{> afQuickField name='categoryId'}}
+                  </div>
+                </div>
+                <div class="item item-divider">
+                  គ្រឿងផ្សំ
+                </div>
+                <div class="card autoform-array-item">
+                  <div class="row">
+                    <div class="col col-25">
+                      <label class="item item-input">
+                        <span class="input-label">ឈ្មោះ</span>
+                        <input type="text" class="ingradientName" style="border: 1px solid #ddd;">
+                        <input type="hidden" class="ingradientId">
+                      </label>
+                    </div>
+                  <div class="col col-25">
+                    <label class="item item-input">
+                      <span class="input-label">ចំនួន</span>
+                      <input type="text" class="qty" style="border: 1px solid #ddd;">
+                    </label>
+                  </div>
+                  <div class="col col-10">
+                    <div class="item">
+                      <button type="button" class="button button-balanced button-small pull-right add-ingradient">
+                        Add <span class="icon ion-plus"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {{#each tmpItems}}
+                  {{> _tmpItem}}
+                {{/each}}
+                <div class="item item-divider">
+                </div>
+                </div>
+                {{> afQuickField name='ingradient' type="hidden"}}
+                {{> afQuickField name='status' type="hidden" value="enable"}}
+                {{> afQuickField name='description'}}
+                {{> afQuickField name="picture"}}
+            </div>
+            <button type="submit" class="button button-positive save">រក្សាទុក</button>
+          </div>
+      {{/autoForm}}
+  {{/ionModal}}
+</template>

@@ -1,0 +1,32 @@
+<template name="restaurantNewEop">
+    {{#contentFor "headerButtonLeft"}}
+      {{>ionNavBackButton path="restaurant.product" text="ទំនិញ"}}
+    {{/contentFor}}
+    {{#contentFor "headerTitle"}}
+      <h1 class="title">បង្កើតបញ្ជី</h1>
+    {{/contentFor}}
+    {{#ionContent}}
+      {{#ionView}}
+      {{#autoForm collection="Restaurant.Collection.EndOfProcess" id="newEop" type="insert" buttonContent="រក្សាទុក"}}
+          <div>
+            <div class="row">
+              <div class="col"><label class="item item-input">
+                <span class="input-label">ចាប់ផ្តើមបិទថ្ងៃទី</span>
+                <input type="text" name="tmpStartEopDate" value="{{tmpStartEopDate}}" readonly="true">
+              </label></div>
+              <div class="col"><label class="item item-input">
+                <span class="input-label">បញ្ជប់ការបិទថ្ងៃទី</span>
+                <input type="text" name="tmpEndEopDate">
+              </label></div>
+            </div>
+            {{> afQuickField name='startEopDate' type="hidden" value=tmpStartEopDate}}
+            {{> afQuickField name='endEopDate' type="hidden"}}
+          </div>
+          <div>
+            <button type="submit" class="button button-positive save">រក្សាទុក</button>
+          </div>
+      {{/autoForm}}
+      {{/ionView}}
+    {{/ionContent}}
+
+</template>

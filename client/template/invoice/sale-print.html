@@ -1,0 +1,112 @@
+<template name="restaurantSalePrint">
+    {{#if data}}
+        {{#with data}}
+            <div style="width: 255px;margin:0 auto; font-size: 10px;font-family:'Khmer OS Battambang','Khmer OS ';">
+                {{#with header}}
+                    <div align="center">
+                        <h4>
+                        <span style="font-family: 'Khmer OS Muol light','Khmer OS Muol';">
+                            {{company.khName}}
+                        </span><br>
+                        </h4>
+                        <p>
+                    <span style="font-family:'Khmer OS Fasthand','Khmer OS Freehand';">
+                        {{company.address}}</span>
+                            <br>
+                            <span>ទូរស័ព្ទ: {{company.phoneNumber}}</span>
+                        </p>
+                        <p>
+                            <smal>
+                                <b style="text-decoration: underline;font-size: 12px;font-family: 'Khmer OS Muol light','Khmer OS Muol';">វិក័យប័ត្រ</b>
+                            </smal>
+                        </p>
+                    </div>
+
+                {{/with}}
+                <hr style="border-top: 1px dashed #8c8b8b;
+	border-bottom: 1px dashed #fff;">
+                <table border="1" width="100%">
+
+                    <tr>
+                        <td style="width: 120px" colspan="2"><b># </b>: {{sale._id}}</td>
+                        <td align="right" style="text-align: right;"><b>បុគ្គលិក : </b> {{sale._staff.profile.username}}</td>
+
+                    </tr>
+                    <tr>
+                        <td style="width: 120px" colspan="2"><b>តុ : </b> {{sale._table.name}}</td>
+                        <td align="right" style="text-align: right;"><b>អតិថិជន : </b> {{sale._customer.name}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><b>កាលបរិច្ឆេទ: </b> {{sale.saleDate}}</td>
+                        <td align="right" style="text-align: right;"><b>អត្រាប្តូរប្រាក់ : </b>{{numFormat sale.exchangeRate '0,0'}}៛</td>
+                    </tr>
+
+                </table>
+
+                <table border="1" width="100%" style="border-collapse: collapse;">
+
+                    <tr align="center" style="border: 1px #000; background-color: #c0c0c0; !important;
+    -webkit-print-color-adjust: exact;">
+                        <td align="left" style="border:1px solid #000;"><b>បរិយាយ</b></td>
+                        <td style="border:1px solid #000;"><b>ចំនួន</b></td>
+                        <td style="border:1px solid #000;"><b>តម្លៃ</b></td>
+                        <td style="border:1px solid #000;"><b>បញ្ចូះ%</b></td>
+                        <td align="right" style="border:1px solid #000;"><b>សរុប</b></td>
+                    </tr>
+
+
+                    {{#each content}}
+                        <tr>
+                            <td>{{_product.name}}</td>
+                            <td align="center">{{quantity}}</td>
+                            <td align="center">{{numFormat price '0,0'}}</td>
+                            <td align="center">{{discount}}</td>
+                            <td align="right">{{amount}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                              <hr size="1"/>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    <tr>
+                        <td></td>
+                        <td>សរុប:</td>
+                        <td colspan="3" align="right">{{footer.subTotal}}{{sale._exchangeRate.symbol}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>បញ្ចុះតម្លៃ:</td>
+                        <td align="right" colspan="3">{{footer.discount}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>សរុបរួម:</td>
+                        <td align="right" colspan="3"><b>{{footer.total}}{{sale._exchangeRate.symbol}}</b>
+                        = <b>{{#each footer.totalConverts}}
+                          {{total}}{{symbol}}
+                          {{/each}}</b></td>
+                    </tr>
+                    <!-- {{#each footer.totalConverts}}
+                        <tr>
+                            <td colspan="2"></td>
+                            <td></td>
+                            <td align="right"><b>{{total}}{{symbol}}</b></td>
+                        </tr>
+                    {{/each}} -->
+                </table>
+                <div>សូមអរគុណ!</div>
+                <div style="width: 253px;margin:0 auto;">
+                    <hr style="border-top: 1px dashed #8c8b8b;
+	border-bottom: 1px dashed #fff;">
+                </div>
+                <div style="text-align: center; font-size: 9px;">Powered by Rabbit IT Solution Tel:053 50 66 777</div>
+
+            </div>
+        {{/with}}
+        {{goBack}}
+    {{else}}
+        {{> ionSpinner icon="spiral"}}
+    {{/if}}
+
+</template>

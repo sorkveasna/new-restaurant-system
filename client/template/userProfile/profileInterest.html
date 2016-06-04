@@ -1,0 +1,17 @@
+<template name="profileInterest">
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">What is your interest?</h1>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#autoForm schema="InterestSchema" id="interestUpdate"}}
+                {{> afQuickField name="profile.interest"}}
+                {{> afQuickField name="profile.tags"}}
+                <div class="bar bar-header bar-stable ">
+                    <button class="button button-positive button-positive">{{> ionIcon icon="checkmark-round"}}រក្សាទុក</button>
+                </div>
+            {{/autoForm}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>

@@ -1,0 +1,57 @@
+<template name="restaurantSalePayment">
+  {{#contentFor "headerButtonLeft"}}
+   {{>ionNavBackButton href=goToSale title="Cancel"}}
+ {{/contentFor}}
+
+ {{#contentFor "headerTitle"}}
+   <h1 class="title">គិតលុយវិក័យប័ត្រៈ {{paymentInvoiceNumber}}</h1>
+ {{/contentFor}}
+
+ {{#ionView}}
+   {{#ionContent}}
+     {{#autoForm collection="Restaurant.Collection.Payments" doc=sale id="activePayment" type="insert"}}
+         <div class="bar bar-header" >
+           <button type="submit" class="button button-positive">រក្សាទុក</button>
+           <button type="submit" class="button button-balanced savePrint">រក្សាទុក&Print</button>
+         </div>
+         <div class="content has-header overflow-scroll">
+           <div class="row">
+             <div class="col col-33">{{> afQuickField name='customerId' label="អតិថិជន"}}</div>
+             <div class="col col-33">{{> afQuickField name='saleId' readonly=true label="លេខវិក័យប័ត្រ"}}</div>
+             <div class="col col-33">{{> afQuickField name='paymentDate' type='datetime-local' label="ថ្ងៃបង់ប្រាក់"}}</div>
+           </div>
+           {{> afQuickField name='dueAmount' readonly=true label="លុយត្រូវបង់"}}
+           <input type="hidden" name="tmpDueAmount" value="{{sale.dueAmount}}">
+           {{> afQuickField name='paidAmount' label="ចំនួនទឹកប្រាក់បានបង់ (៛)" type="hidden"}}
+           <div class="item item-divider positive">
+
+          </div>
+          <div class="col col-33">
+            <label class="item item-input">
+              <span class="input-label">ចំនួនទឹកប្រាក់បានបង់ (៛):</span>
+              <input type="text" name="tmpPaidAmount" value="{{sale.dueAmount}}" style="background: #387ef5;
+              color: #fff; padding-left: 5px; font-weight: bold;">
+            </label>
+          </div>
+          <div class="col col-33">
+            <label class="item item-input">
+              <span class="input-label">ចំនួនទឹកប្រាក់បានបង់ ($):</span>
+              <input type="text" name="dollar" style="background: #387ef5;
+              color: #fff; padding-left: 5px; font-weight: bold;">
+            </label>
+          </div>
+
+           <div class="item item-divider assertive">
+
+           </div>
+           {{> afQuickField name='balanceAmount' label="លុយអាប់" readonly=true}}
+           <label class="item item-input">
+             <span class="input-label">លុយអាប់ ($):</span>
+             <input type="text" name="changeInDollar" readonly="true">
+           </label>
+           {{> afQuickField name='description' label="បរិយាយ" type="textarea"}}
+         </div>
+     {{/autoForm}}
+  {{/ionContent}}
+{{/ionView}}
+</template>

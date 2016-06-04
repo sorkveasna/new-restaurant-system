@@ -1,0 +1,68 @@
+<template name="restaurantSaleCheckoutInvoiceCategoryProduct">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton href=goToCategory text='ផ្នែក'}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">{{currentPath}} ផ្នែកៈ {{categoryName}}</h1>
+  {{/contentFor}}
+  {{#ionView}}
+    {{#ionContent}}
+
+        {{#each products}}
+          <div class="col-edit col-20-edit responsive-sm" >
+            {{> productList}}
+          </div>
+        {{/each}}
+        {{#if hasMore}}
+          <div class="col col-offset-50" >
+          <button class="button button-positive loadMore">Load More</button>
+          </div>
+        {{/if}}
+    {{/ionContent}}
+  {{/ionView}}
+  {{> _sale_tabs}}
+</template>
+
+
+
+<template name="productList">
+  <div class="list card {{#if productAdded _id}}border-blue{{/if}} brower-version">
+  <div class="item item-icon-left">
+    <div class="row">
+      <div class="col col-50">
+        <i class=" cursor-p icon {{#if productAdded _id}}icon-remove ion-close-circled assertive{{else}}icon-add-new-product ion-plus-circled balanced{{/if}} "></i>
+
+        <a class="item item-thumbnail-left" href="#" style="border: none;">
+          {{#if picture}}
+          <img class="full-image" src="delorean.jpg">
+          {{else}}
+            <img src="/content-images/no-image-available.jpg" alt="" width="100%"/>
+          {{/if}}
+          <h2>{{name}} <b>({{_unit.name}})</b></h2>
+          <p>តម្លៃៈ <b>{{price}}</b></p>
+        </a>
+
+      </div>
+      <div class="col col-50">
+        {{#if productAdded _id}}
+        <p class="item item-icon-left item-icon-right custom-qty" style="margin-top: 25px;">
+          <i class="button button-icon icon ion-android-remove assertive"></i>
+          <!-- <label id = "rounded" class="item item-input">
+          <input type="text" value="1" style="text-align: center;" class="qty">
+        </label> -->
+        <span class="col-offset-50 qty" >1</span>
+        <i class="button button-icon icon ion-android-add balanced"></i>
+      </p>
+      {{/if}}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="item item-body">
+
+  </div> -->
+
+
+</div>
+</template>

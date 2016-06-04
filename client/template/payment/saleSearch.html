@@ -1,0 +1,69 @@
+<template name="restaurantActivePaymentSearch">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton href="/restaurant/payment" text="ត្រលប់ក្រោយ"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">ស្វែងរក</h1>
+  {{/contentFor}}
+  {{#ionView}}
+  {{#ionContent}}
+        <div class="row">
+          {{#each locations}}
+            <div class="col col-20">
+            <label class="item-input-wrapper">
+              <label class="toggle">
+                <input type="checkbox" class="location">
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+              {{name}}
+            </label>
+            </div>
+          {{/each}}
+        </div>
+        <div class="row">
+          <div class="col col-20">
+          <label class="item-input-wrapper">
+            <label class="toggle toggle-positive">
+              <input type="checkbox" class="status" checked=true>
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+            <span class="status-text">Active</span>
+          </label>
+          </div>
+          <div class="col col-20">
+            <input type="text" name="date" placeholder="Expired Date">
+          </div>
+        </div>
+        <div class="item item-input-inset">
+          {{> ionIcon icon="ios-search" class="placeholder-icon"}}
+          <input type="text" placeholder="Search" value="{{searchQuery}}" style="width: 90%;">
+        </div>
+        {{#ionList}}
+        {{#if saleIsNotZero}}
+        {{#each products}}
+          {{#ionItem  href=goToActivePaymentInvoice buttonRight=true avatar=true class="item-icon-right animated bounceInDown"}}
+            {{> activeSale}}
+          {{/ionItem}}
+        {{/each}}
+        {{#if hasMore}}
+          {{#if searchQuery}}
+            <div class="col col-20 col-offset-50">
+                <button class="button button-positive loadMore">បង្ហាញបន្ថែម</button>
+            </div>
+          {{/if}}
+        {{/if}}
+        {{else}}
+          <div class="list card">
+            <div class="item item-text-wrap" align="center">
+              <h2>អត់មានទិន្នន័យ</h2>
+            </div>
+          </div>
+        {{/if}}
+      {{/ionList}}
+      {{/ionContent}}
+      {{/ionView}}
+</template>

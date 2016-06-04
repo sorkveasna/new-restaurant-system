@@ -1,0 +1,69 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base             # Packages every Meteor app needs to have
+mobile-experience       # Packages for a great mobile UX
+mongo                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session                 # Client-side reactive dictionary for your app
+jquery                  # Helpful client-side library
+tracker                 # Meteor's client-side reactive programming library
+
+standard-minifiers      # JS/CSS minifiers run for production mode
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+ecmascript              # Enable ECMAScript2015+ syntax in app code
+
+meteoric:autoform-ionic
+aldeed:autoform
+aldeed:simple-schema
+aldeed:collection2
+fourseven:scss
+fortawesome:fontawesome
+meteoric:ionic-sass
+meteoric:ionicons-sass
+fastclick
+ongoworks:security
+themeteorchef:bert
+underscore
+iron:router
+meteoric:ionic
+accounts-password
+#accounts-facebook
+accounts-ui
+pfafman:font-awesome-4
+#useraccounts:ionic
+#accounts-google
+natestrauser:select2
+mystor:device-detection
+useraccounts:ionic
+theara:id-generator
+matb33:collection-hooks
+alanning:roles
+theara:collection-cache
+yogiben:autoform-file
+cfs:standard-packages
+cfs:gridfs@0.0.33
+notorii:autoform-datetimepicker
+momentjs:moment
+lbee:moment-helpers
+simple:reactive-method
+numeral:numeral
+tmeasday:publish-counts
+meteorhacks:kadira
+mrt:jquery-ui
+dsyko:jquery-ui-touch-punch
+xamfoo:reactive-obj
+msavin:fetcher
+natestrauser:animate-css
+ryanswapp:datetime-picker
+ovcharik:alertifyjs
+risul:moment-timezone
+digilord:sugarjs
+theara:numeral-helpers
+meteorhacks:aggregate
+theara:call-async
+danappelxx:hover.css
+chart:chart

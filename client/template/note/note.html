@@ -1,0 +1,56 @@
+<template name="restaurantNote">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="restaurant.data" text="ទិន្នន័យ"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">កំណត់សំគាល់</h1>
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear" data-ion-modal="newNote">{{> ionIcon icon="ios-plus-empty"}}</button>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+
+        <div class="card row">
+            <div class="col col-90 text-center"><span class="positive">កត់ត្រា</span></div>
+            <div class="col col-10 text-center"><span class="positive">ជម្រើស</span></div>
+        </div>
+
+        <div class="card">
+            {{#each customers}}
+                <div class="row">
+                    <div class="col col-90" style="border: 1px solid #ddd;">{{name}}</div>
+
+
+                    <div class="col col-5 text-center" style="border: 1px solid #ddd;">
+                        <a href="#" class="positive" data-ion-modal="editNote"
+                           data-id="{{_id}}">{{>ionIcon icon="edit"}}កែប្រែ</a>
+                    </div>
+                    <div class="col col-5 text-center" style="border: 1px solid #ddd;">
+                        <a href="#" class="remove-note assertive">{{>ionIcon icon="trash-b"}}លុប</a>
+                    </div>
+                </div>
+
+            {{/each}}
+        </div>
+
+        <!--before changed-->
+      <!--{{#ionList}}
+        {{#each customers}}
+          {{#ionItem  buttonRight=true avatar=true class="item-icon-right"}}
+          <span class="cursor-p" data-ion-modal="editNote" data-id="{{_id}}">
+            {{name}}
+          </span>
+          <button data-action="confirm" class=" button button-clear">
+            {{> ionIcon icon="close-circled"}}</button>
+          {{/ionItem}}
+        {{/each}}
+      {{/ionList}}-->
+        <!--before changed-->
+    {{/ionContent}}
+  {{/ionView}}
+  {{> _data}}
+</template>

@@ -1,0 +1,71 @@
+<template name="restaurantSaleTableSaleInvoiceEditSale">
+  {{#contentFor "headerButtonLeft"}}
+   {{>ionNavBackButton href=goToSale title="Cancel"}}
+ {{/contentFor}}
+
+ {{#contentFor "headerTitle"}}
+   <h1 class="title">កែប្រែវិក័យប័ត្រ: {{invoiceNumber}}</h1>
+ {{/contentFor}}
+
+ {{#ionView}}
+   {{#ionContent}}
+     {{#autoForm collection="Restaurant.Collection.Sales" doc=sale id="editSaleCustom" type="update" buttonContent="រក្សាទុក"}}
+         <div class="content has-header overflow-scroll">
+           {{> afQuickField name='tableLocation'}}
+           {{> afQuickField name='tableId'}}
+           {{> afQuickField name='saleDate' type="datetime-local"}}
+           <div class="row">
+             <div class="col">
+               {{> afQuickField name='customerId'}}
+             </div>
+             <div class="col cursor-p"><a href="#" data-ion-modal="newCustomer">
+               <label>
+                 បន្ថែមអតិថិជនថ្មី{{> ionIcon icon="ios-plus-empty"}}
+               </label>
+             </a></div>
+           </div>
+           {{> afQuickField name='numberOfCustomer' label="ចំនួនភ្ញៀវ"}}
+           {{> afQuickField name='description'}}
+         </div>
+         <div class="bar bar-header">
+           <button type="submit" class="button button-positive">រក្សាទុក</button>
+         </div>
+     {{/autoForm}}
+   {{/ionContent}}
+ {{/ionView}}
+</template>
+
+
+<template name="restaurantSaleTableSaleInvoiceEditDiscount">
+  {{#contentFor "headerButtonLeft"}}
+   {{>ionNavBackButton href=goToSale title="Cancel"}}
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+   <h1 class="title">កែប្រែវិក័យប័ត្រ: {{invoiceNumber}}</h1>
+  {{/contentFor}}
+  {{#ionView}}
+    {{#ionContent}}
+    {{#autoForm collection="Restaurant.Collection.Sales" doc=sale id="editDiscountCustom" type="update"}}
+        <div class="content has-header overflow-scroll">
+          {{> afQuickField name="subTotal" readonly=true}}
+            <div class="col col-50">
+              <label class="item item-input">
+                <span class="input-label">Vipcard:</span>
+                <input type="password" name="vipcard" autofocus="true">
+              </label>
+              {{> afQuickField name='vipcardId' readonly=true type="hidden"}}
+            </div>
+            <div class="col col-50" >
+              {{> afQuickField name='discount' label="បញ្ចុះតម្លៃ(%)" }}
+             </div>
+          {{> afQuickField name='total' readonly=true label="Grand Total"}}
+          {{> afQuickField name='balanceAmount' type="hidden"}}
+        </div>
+        <div class="bar bar-header">
+          <button type="submit" class="button button-positive">រក្សាទុក</button>
+        </div>
+    {{/autoForm}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>

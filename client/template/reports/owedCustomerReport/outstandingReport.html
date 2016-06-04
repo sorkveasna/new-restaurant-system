@@ -1,0 +1,117 @@
+<!--Form-->
+<template name="restaurantOutstandingReport">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="restaurant.report" text='របាយការណ៍'}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">របាយការណ៍ អតិថិជនជំពាក់</h1>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#autoForm schema="Restaurant.Schema.OutstandingReport"  id="restaurantOutstandingReport" action="/restaurant/outstanding-report-gen"  target="_blank"}}
+                <div class="bar bar-header">
+                    <button type="submit" class="button button-balanced">Generate</button>
+                    <button type="reset" class="button button-stable">Reset</button>
+                </div>
+                <div class="content has-header overflow-scroll">
+                    <div class="row">
+                      <div class="col">{{> afQuickField name='date' }}</div>
+                      <div class="col">{{> afQuickField name='customerId' type="select" options=customers}}</div>
+                    </div>
+                </div>
+            {{/autoForm}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>
+
+
+<!--Generate-->
+<template name="restaurantOutstandingReportGen">
+        {{#if data}}
+                {{#with data}}
+                    {{#with title}}
+                        <div class="title">
+                            <div class="title-1x-kh-muol">{{khName}}</div>
+                            <div class="title-1x">{{enName}}</div>
+                            <div style="text-decoration: underline;">របាយការណ៍ អតិថិជនជំពាក់</div>
+                            <div class="title-2x">{{khAddress}}</div>
+                        </div>
+                    {{/with}}
+                    {{#with header}}
+                        <div style="width: 100%">
+                            <div style="width: 50%; float: left">
+                                <ul class="list-unstyled">
+                                    <li><strong>កាលបរិច្ឆេទ:</strong> {{date}}</li>
+                                </ul>
+                            </div>
+
+                            <div style="width: 50%; float: right">
+                                <ul class="list-unstyled">
+
+                                    <li><strong>អតិថិជន:</strong> {{customer}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    {{/with}}
+
+
+                    <!--Content-->
+                    <table class="report-content">
+                      <thead class="content-header">
+                 <tr>
+                     <th>លេខ</th>
+                     <th>វិក័យប័ត្រលេខ</th>
+                     <th>អតិថិជន</th>
+                     <th>លេខទូរស័ព្ទ</th>
+                     <th>លក់ថ្ងៃទី</th>
+                     <th>ប្រាក់ត្រូវបង់</th>
+                     <th>ប្រាក់បានបង់</th>
+                     <th>ប្រាក់នៅសល់</th>
+                 </tr>
+                 </thead>
+
+                 <tbody class="content-body">
+                 {{#each content}}
+                     <tr>
+                         <td>{{index}}</td>
+                         <td>{{_id}}</td>
+                         <td>{{_customer.name}}</td>
+                         <td>{{_customer.telephone}}</td>
+                         <td>{{moFormat saleDate 'YYYY-MM-DD HH:mm:ss'}}</td>
+                         <td align='right'>{{numFormat _payment.dueAmount '0,0'}}</td>
+                         <td align='right'>{{numFormat _payment.paidAmount '0,0'}}</td>
+                         <td align='right'>{{numFormat _payment.balanceAmount '0,0'}}</td>
+                     </tr>
+                 {{/each}}
+                 {{#with footer}}
+                     <tr align='right'>
+                       <td colspan="5">
+                       សរុប (៛):
+                       </td>
+                       <td align='right'>
+                            {{numFormat dueAmount '0,0'}}
+                       </td>
+                       <td align='right'>{{numFormat paidAmount '0,0'}}</td>
+                       <td align='right'>{{numFormat balanceAmount '0,0'}}</td>
+                     </tr>
+                     <tr align='right'>
+                       <td colspan="5">
+                       សរុប ($):
+                       </td>
+                       <td align='right'>
+                            {{numFormat dueAmountInUSD '0,0.00'}}
+                       </td>
+                       <td align='right'>{{numFormat paidAmountInUSD '0,0.00'}}</td>
+                       <td align='right'>{{numFormat balanceAmountInUSD '0,0.00'}}</td>
+                     </tr>
+                 {{/with}}
+                 </tbody>
+                    </table>
+                {{/with}}
+        {{else}}
+            <p> សូមមេត្តារងចាំ ...</p>
+        {{/if}}
+
+</template>

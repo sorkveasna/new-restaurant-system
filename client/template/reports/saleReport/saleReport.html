@@ -1,0 +1,140 @@
+<!--Form-->
+<template name="restaurantSaleReport">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="restaurant.report" text='របាយការណ៍'}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">របាយការណ៍ លក់</h1>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#autoForm schema="Restaurant.Schema.SaleReport"  id="restaurantSaleReport" action="/restaurant/sale-report-gen"  target="_blank"}}
+                <div class="bar bar-header">
+                    <button type="submit" class="button button-balanced">Generate</button>
+                    <button type="reset" class="button button-stable">Reset</button>
+                </div>
+                <div class="content has-header overflow-scroll">
+                    {{> afQuickField name='fromDate' type='datetime'}}
+                    {{> afQuickField name='toDate' type="datetime"}}
+                    <div class="row">
+                      <div class="col col-33">{{> afQuickField name='status' type="select" options=status }}</div>
+                      <div class="col col-33">{{> afQuickField name='customerId' type="select" options=customers }}</div>
+                      <div class="col col-33">{{> afQuickField name='staffId' type="select" options=users }}</div>
+                    </div>
+                </div>
+            {{/autoForm}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>
+
+<!--Generate-->
+<template name="restaurantSaleReportGen">
+    {{#if data}}
+            {{#with data}}
+                {{#with title}}
+                    <div class="title">
+                        <div class="title-1x-kh-muol">{{khName}}</div>
+                        <div class="title-1x">{{enName}}</div>
+                        <div style="text-decoration: underline;">របាយការណ៍ លក់</div>
+                        <div class="title-2x">{{khAddress}}</div>
+                    </div>
+                {{/with}}
+                {{#with header}}
+                    <div style="width: 100%">
+                        <div style="width: 50%; float: left">
+                            <ul class="list-unstyled">
+                                <li><strong>កាលបរិច្ឆេទ:</strong> {{date}}</li>
+                                <li><strong>ប្រភេទវិក័យប័ត្រ:</strong> {{status}}</li>
+                            </ul>
+                        </div>
+                        <div style="width: 50%; float: right">
+                            <ul class="list-unstyled">
+                                <li><strong>អតិថិជន:</strong> {{customer}}</li>
+                                <li><strong>បុគ្គលិក:</strong> {{staff}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                {{/with}}
+
+                <!--Content-->
+                <table class="report-content">
+                    <thead class="content-header">
+                    <tr>
+                        <th>ល.រ</th>
+                        <th>លេខតុ</th>
+                        <th>លេខវិក័យប័ត្រ</th>
+                        {{#if statusCanceled data.header.status}}
+                          <th>វិក័យប័ត្រយោង</th>
+                        {{/if}}
+                        <th>កាលបរិច្ឆេទ</th>
+                        <th>បុគ្គលិក</th>
+                        <th>អតិថិជន</th>
+                        <th>ប្រភេទវិក័យប័ត្រ</th>
+                        <!--<th>Total Cost</th>-->
+                        <!--<th align="right">Paid Amount</th>-->
+                        <!--<th align="right">Owed Amount</th>-->
+                        <th>សរុបរង</th>
+                        <th>បញ្ចុះ(%)</th>
+                        <th align="right">សរុប</th>
+                        {{#each grandTotalConvert}}
+                            <th align="right">{{toCurrencyId}}</th>
+                        {{/each}}
+                    </tr>
+                    </thead>
+
+                    <tbody class="content-body">
+                    {{#each content}}
+                        <tr class="{{#if partial status}}highlight-partial{{/if}}">
+                            <td align="center">{{order}}</td>
+                            <td>{{_table.name}}({{_table._tableLocation.name}})</td>
+                            <td>{{_id}}</td>
+                            {{#if statusCanceled data.header.status}}
+                              <td>{{refId}}</td>
+                            {{/if}}
+                            <td>{{saleDate}}</td>
+                            <td>{{user}}</td>
+                            <td>{{_customer.name}}</td>
+                            <td>{{status}}</td>
+                            <!--<td align="right">{{totalCost}}</td>-->
+                            <!--<td align="right">{{paidAmount}}</td>-->
+                            <!--<td align="right">{{owedAmount}}</td>-->
+                            <td align="right">{{numFormat subTotal '0,0'}}</td>
+                            <td align="center">
+                              {{discount}}
+                            </td>
+                            <td align="right">{{total}}</td>
+                            {{#each exchangeRates}}
+                                <td align="right">{{exTotalFormatted}}</td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                    <tbody>
+                    <tr class="content-body">
+                        {{#if statusCanceled data.header.status}}
+                          <td colspan="8" style="text-align: right">Grand Total:</td>
+                        {{else}}
+                          <td colspan="7" style="text-align: right">Grand Total:</td>
+                        {{/if}}
+                        <!--<td align="right">{{grandTotalCost}}</td>-->
+                        <!--<td align="right">{{grandTotalPaidAmount}}</td>-->
+                        <!--<td align="right">{{grandTotalOwedAmount}}</td>-->
+                        <td align="right">{{subTotal}}</td>
+                        <td align="right"></td>
+                        <td align="right">{{grandTotal}}</td>
+                        {{#each grandTotalConvert}}
+                            <td align="right">{{totalConvert}}</td>
+                        {{/each}}
+                    </tr>
+                    </tbody>
+                </table>
+
+            {{/with}}
+
+    {{else}}
+        <p> សូមមេត្តារងចាំ ...</p>
+    {{/if}}
+
+</template>
